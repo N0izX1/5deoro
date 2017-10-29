@@ -10,7 +10,7 @@ tput cup 3 1
 echo "Tipos de apuestas múltiples:"
 tput cup 4 1 
 echo "1) 6 números 6 combinaciones"
-tput cup 5 1
+tput cup 5 1 
 echo "2) 7 números 21 combinaciones"
 tput cup 6 1 
 echo "3) 8 números 56 combinaciones" 
@@ -315,7 +315,7 @@ fi
                                         var5=$((1+RANDOM%7))
                                 done
                                 echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]} 
-                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple6 >> jugadas
+                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple7 >> jugadas
                                 if [ "$revancha" -eq "1" ]
                                 then
 
@@ -494,7 +494,7 @@ fi
                                         var5=$((1+RANDOM%8))
                                 done
                                 echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]} 
-                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple6 >> jugadas
+                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple8 >> jugadas
                                 if [ "$revancha" -eq "1" ]
                                 then
 
@@ -625,36 +625,83 @@ fi
                 if [ "$saldo" -gt "$monto" ] || [ "$saldo" -eq "$monto" ]
                 then
                         echo "Combinaciones resultantes:"
-                        for (( c=i; c<44; c++ ))
+                        for (( c=1; c<44; c++ ))
                         do
-                                var1=$((1+RANDOM%4))
-                                var2=$((1+RANDOM%4))
-                                var3=$((1+RANDOM%4))
-                                var4=$((1+RANDOM%4))
+                                var1=$((1+RANDOM%5))
+                                var2=$((1+RANDOM%5))
+                                var3=$((1+RANDOM%5))
+                                var4=$((1+RANDOM%5))
+				var5=$((1+RANDOM%5))
+                                while [ "$var1" -eq "$var2" ] || [ "$var1" -eq "$var3" ] || [ "$var1" -eq "$var4" ] || [ "$var1" -eq "$var5" ]
+                                do
+                                        var1=$((1+RANDOM%5))
+                                done
+                                while [ "$var2" -eq "$var1" ] || [ "$var2" -eq "$var3" ] || [ "$var2" -eq "$var4" ] || [ "$var2" -eq "$var5" ]
 
-                                while [ "$var1" -eq "$var2" ] || [ "$var1" -eq "$var3" ] || [ "$var1" -eq "$var4" ]
                                 do
-                                        var1=$((1+RANDOM%4))
+                                        var2=$((1+RANDOM%5))
                                 done
-                                while [ "$var2" -eq "$var1" ] || [ "$var2" -eq "$var3" ] || [ "$var2" -eq "$var4" ] 
+                                while [ "$var3" -eq "$var1" ] || [ "$var3" -eq "$var2" ] || [ "$var3" -eq "$var4" ] || [ "$var3" -eq "$var5" ]
+ 
                                 do
-                                        var2=$((1+RANDOM%4))
+                                        var3=$((1+RANDOM%5))
                                 done
-                                while [ "$var3" -eq "$var1" ] || [ "$var3" -eq "$var2" ] || [ "$var3" -eq "$var4" ] 
+                                while [ "$var4" -eq "$var2" ] || [ "$var4" -eq "$var3" ] || [ "$var4" -eq "$var1" ] || [ "$var4" -eq "$var5" ]
                                 do
-                                        var3=$((1+RANDOM%4))
+                                        var4=$((1+RANDOM%5))
                                 done
-                                while [ "$var4" -eq "$var2" ] || [ "$var4" -eq "$var3" ] || [ "$var4" -eq "$var1" ]
+                                while [ "$var5" -eq "$var1" ] || [ "$var5" -eq "$var2" ] || [ "$var5" -eq "$var3" ] || [ "$var5" -eq "$var4" ]
                                 do
-                                        var4=$((1+RANDOM%4))
+                                        var5=$((1+RANDOM%5))
                                 done
-                          
-                                echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"X 
-                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"X":"$usuario":"multiple4 >> jugadas
+				
+				multiple4[c]=":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}
+				if [ "$c" -gt "1" ]
+				then
+                       		for (( i=1; i<${#multiple4[@]}; i++ ))
+				do
+				while [ "${multiple4[c]}" = "${multiple4[i]}" ]
+				do
+					var1=$((1+RANDOM%5))
+                                	var2=$((1+RANDOM%5))
+                                	var3=$((1+RANDOM%5))
+                                	var4=$((1+RANDOM%5))
+                                	var5=$((1+RANDOM%5))
+                                	while [ "$var1" -eq "$var2" ] || [ "$var1" -eq "$var3" ] || [ "$var1" -eq "$var4" ] || [ "$var1" -eq "$var5" ]
+                                	do
+                                        	var1=$((1+RANDOM%5))
+                                	done
+                                	while [ "$var2" -eq "$var1" ] || [ "$var2" -eq "$var3" ] || [ "$var2" -eq "$var4" ] || [ "$var2" -eq "$var5" ]
+
+                                	do
+                                        	var2=$((1+RANDOM%5))
+                                	done
+                                	while [ "$var3" -eq "$var1" ] || [ "$var3" -eq "$var2" ] || [ "$var3" -eq "$var4" ] || [ "$var3" -eq "$var5" ]
+ 
+                                	do
+                                        	var3=$((1+RANDOM%5))
+                                	done
+                                	while [ "$var4" -eq "$var2" ] || [ "$var4" -eq "$var3" ] || [ "$var4" -eq "$var1" ] || [ "$var4" -eq "$var5" ]
+                                	do
+                                	        var4=$((1+RANDOM%5))
+                                	done                                                          
+                                	while [ "$var5" -eq "$var1" ] || [ "$var5" -eq "$var2" ] || [ "$var5" -eq "$var3" ] || [ "$var5" -eq "$var4" ]
+                                	do
+                                        	var5=$((1+RANDOM%5))
+                                	done
+
+                                	multiple4[c]=":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}
+  
+				
+				done
+				done
+				fi
+				
+					echo ${multiple4[c]}":"$usuario":"multiple4 >> jugadas 
                                 if [ "$revancha" -eq "1" ]
                                 then
 
-                                echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"X":"$usuario >> jugadasrevancha
+                                echo ${multiple4[c]}":"$usuario":"multiple4 >> jugadasrevancha
 
                                 fi
                         done
