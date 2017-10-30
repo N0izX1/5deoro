@@ -1,8 +1,13 @@
 clear
-echo "Bienvenido $usuario"
+sh cabecera.sh
+echo "Elija una opcion:"
+tput cup 5 20
 echo " 1) Administrar Saldo"
+tput cup 6 20
 echo " 2) Jugar"
+tput cup 7 20
 echo " 3) Realizar sorteo"
+tput cup 8 20
 echo " 4) Cerrar Sesión"
 export usuario=$usuario
 menu=0

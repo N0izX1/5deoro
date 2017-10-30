@@ -1,22 +1,17 @@
 clear
-tput cup 1 1
-echo $usuario 
-tput cup 1 15
+sh cabecera.sh
 echo "Apuesta Múltiple"
-tput cup 1 40 
-saldo=`grep $usuario usuarios | cut -d":" -f7`
-echo "Saldo: $saldo"
-tput cup 3 1
+tput cup 6 20
 echo "Tipos de apuestas múltiples:"
-tput cup 4 1 
+tput cup 7 20 
 echo "1) 6 números 6 combinaciones"
-tput cup 5 1 
+tput cup 8 20 
 echo "2) 7 números 21 combinaciones"
-tput cup 6 1 
+tput cup 9 20 
 echo "3) 8 números 56 combinaciones" 
-tput cup 7 1
+tput cup 10 20
 echo "4) 4 números 44 combinaciones" 
-tput cup 8 1
+tput cup 11 20
 echo "0) Volver al menu" 
 
 opcion=5
@@ -26,39 +21,35 @@ do
 	case $opcion in 
 	1) 
 	clear
-	tput cup 1 1 
-	echo $usuario
-	tput cup 1 15
+	sh cabecera.sh
 	echo "Apuesta Múltiple"
-	tput cup 1 40
-	echo "Saldo: $saldo"
-	tput cup 3 1 
+	tput cup 6 20 
 	echo "Numero 1:"
-	tput cup 4 1
+	tput cup 7 20
 	echo "Numero 2:"
-	tput cup 5 1
+	tput cup 8 20
 	echo "Numero 3:"
-	tput cup 6 1
-	echo "Numero 4:"
-	tput cup 7 1
-	echo "Numero 5:"
-	tput cup 8 1
-	echo "Numero 6:"
-	tput cup 9 1
-	echo "Jugar con revancha:   (S/N)" 
-	tput cup 3 10
-	read num1
-	tput cup 4 10
-	read num2
-	tput cup 5 10
-	read num3
-	tput cup 6 10	
-	read num4
-	tput cup 7 10	
-	read num5
-	tput cup 8 10	
-	read num6
 	tput cup 9 20
+	echo "Numero 4:"
+	tput cup 10 20
+	echo "Numero 5:"
+	tput cup 11 20
+	echo "Numero 6:"
+	tput cup 12 20
+	echo "Jugar con revancha:   (S/N)" 
+	tput cup 6 30
+	read num1
+	tput cup 7 30
+	read num2
+	tput cup 8 30
+	read num3
+	tput cup 9 30	
+	read num4
+	tput cup 10 30	
+	read num5
+	tput cup 11 30	
+	read num6
+	tput cup 12 40
 	read revancha
 	if [ "$revancha" = "S" ] || [ "$revancha" = "s" ] 
 	then 
@@ -71,26 +62,22 @@ do
 	if [ "$num1" -le "48" ] && [ "$num2" -le "48" ] && [ "$num3" -le "48" ] && [ "$num4" -le "48" ] && [ "$num5" -le "48" ] && [ "$num1" -gt "0" ] && [ "$num2" -gt "0" ] && [ "$num3" -gt "0" ] && [ "$num4" -gt "0" ] && [ "$num5" -gt "0" ] && [ "$num1" -ne "$num2" ] && [ "$num1" -ne "$num3" ] && [ "$num1" -ne "$num4" ] && [ "$num1" -ne "$num5" ] && [ "$num2" -ne "$num3" ] && [ "$num2" -ne "$num4" ] && [ "$num2" -ne "$num5" ] && [ "$num3" -ne "$num4" ] && [ "$num3" -ne "$num5" ] && [ "$num4" -ne "$num5" ] && [ "$num6" -le "48" ] && [ "$num6" -gt "0" ] && [ "$num6" -ne "$num1" ] && [ "$num6" -ne "$num2" ] && [ "$num6" -ne "$num3" ] && [ "$num6" -ne "$num4" ] && [ "$num6" -ne "$num5" ]  2> /dev/null
 	then
 		clear
-		tput cup 1 1
-		echo $usuario
-		tput cup 1 15
+		sh cabecera.sh
 		echo "Apuesta Múltiple"
-		tput cup 1 40
-		echo "Saldo: $saldo"
-		tput cup 3 1
+		tput cup 6 20
 		echo "Numeros elegidos: $num1:$num2:$num3:$num4:$num5:$num6"
-		tput cup 3 40 
+		tput cup 5 40 
 		echo "6 combinaciones de 5 números"
-		tput cup 4 1
+		tput cup 7 40
 		if [ "$revancha" -eq "1" ]
 		then
 			echo "Valor: $ 180"
 		else 
 			echo "Valor: $ 120"
 		fi
-		tput cup 6 1 
+		tput cup 8 20 
 		echo "Para confirmar la apuesta múltiple presione 5"
-		tput cup 7 1
+		tput cup 9 20
 		echo "Para volver al menú presione 0"
   		subopcion=4 
 		while [ "$subopcion" -ne "5" ] && [ "$subopcion" -ne "0" ]
@@ -100,8 +87,6 @@ do
 			0) sh menuapuestas.sh ;;
 
 			5) 
-
-
 				apuesta[1]=$num1
 				apuesta[2]=$num2
 				apuesta[3]=$num3
@@ -110,7 +95,6 @@ do
 				apuesta[6]=$num6
 		if [ "$saldo" -gt "$monto" ] || [ "$saldo" -eq "$monto" ]
 		then
-			echo "Combinaciones resultantes:"
 			for (( c=i; c<6; c++ )) 
 			do
 				var1=$((1+RANDOM%6))
@@ -139,7 +123,6 @@ do
 				do
 					var5=$((1+RANDOM%6))
 				done	
-				echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]} 
 				echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple6 >> jugadas
 				if [ "$revancha" -eq "1" ]
 				then 
@@ -148,7 +131,10 @@ do
 					
 				fi
 			done
-        echo "Presione 0 para volver atras."
+        tput cup 12 20
+	echo "Apuestas realizadas con éxito"
+	tput cup 13 50
+	echo "Presione 0 para volver atras."
         salir=1
         while [ "$salir" -ne "0" ]
         do
@@ -159,7 +145,9 @@ do
         done
 	
 		else 
+		tput cup 9 20
 		echo "Saldo insuficiente."
+		tput cup 10 50 
 		echo "Presione 0 para volver atras"
 		volver=1
 		while [	"$volver" -ne "0" ]
@@ -171,7 +159,21 @@ do
 		esac
 		done	
 		fi
-			 
+	
+			oro=`grep oro pozos | cut -d":" -f1`
+                        revancha=`grep revancha pozos | cut -d":" -f1`
+                        plata=`grep plata pozos | cut -d":" -f1`
+
+                        porcentaje=$((monto / 3))
+
+                        nuevooro=$((oro + porcentaje))
+                        nuevoplata=$((plata + porcentaje))
+                        nuevorevancha=$((revancha + porcentaje))
+                        rm pozos
+                        echo $nuevooro":"oro > pozos
+                        echo $nuevoplata":"plata >> pozos
+                        echo $nuevorevancha":"revancha >> pozos
+
 			nuevosaldo=$((saldo - monto))
         		lineaactual=`grep $usuario usuarios | cut -d ":" -f1,2,3,4,5,6`
 
@@ -184,7 +186,9 @@ do
 esac
 done
 else
+	tput cup 12 20
 	echo "Hubo un error. Presione 1 para reintentar."
+	tput cup 13 50
 	echo "Presione 0 para volver al menú"
 	option=5
 	while [ "$option" -ne "1" ] && [ "$option" -ne "0" ]
@@ -203,43 +207,39 @@ fi
 
 2)
         clear
-        tput cup 1 1
-        echo $usuario
-        tput cup 1 15
+	sh cabecera.sh
         echo "Apuesta Múltiple"
-        tput cup 1 40
-        echo "Saldo: $saldo"
-        tput cup 3 1
+        tput cup 6 20
         echo "Numero 1:"
-        tput cup 4 1
+        tput cup 7 20
         echo "Numero 2:"
-        tput cup 5 1
+        tput cup 8 20
         echo "Numero 3:"
-        tput cup 6 1
+        tput cup 9 20
         echo "Numero 4:"
-        tput cup 7 1
-        echo "Numero 5:"
-        tput cup 8 1
-        echo "Numero 6:"
-	tput cup 9 1
-	echo "Numero 7:"
-        tput cup 10 1
-        echo "Jugar con revancha:   (S/N) ( $ 630 )" 
-        tput cup 3 10
-        read num1
-        tput cup 4 10
-        read num2
-        tput cup 5 10
-        read num3
-        tput cup 6 10
-        read num4
-        tput cup 7 10
-        read num5
-        tput cup 8 10
-        read num6
-	tput cup 9 10
-	read num7
         tput cup 10 20
+        echo "Numero 5:"
+        tput cup 11 20
+        echo "Numero 6:"
+	tput cup 12 20
+	echo "Numero 7:"
+        tput cup 13 20
+        echo "Jugar con revancha:   (S/N)" 
+        tput cup 6 20
+        read num1
+        tput cup 7 20
+        read num2
+        tput cup 8 20
+        read num3
+        tput cup 9 20
+        read num4
+        tput cup 10 20
+        read num5
+        tput cup 11 20
+        read num6
+	tput cup 12 20
+	read num7
+        tput cup 13 40
         read revancha
         if [ "$revancha" = "S" ] || [ "$revancha" = "s" ]
         then
@@ -252,21 +252,17 @@ fi
         if [ "$num1" -le "48" ] && [ "$num2" -le "48" ] && [ "$num3" -le "48" ] && [ "$num4" -le "48" ] && [ "$num5" -le "48" ] && [ "$num1" -gt "0" ] && [ "$num2" -gt "0" ] && [ "$num3" -gt "0" ] && [ "$num4" -gt "0" ] && [ "$num5" -gt "0" ] && [ "$num1" -ne "$num2" ] && [ "$num1" -ne "$num3" ] && [ "$num1" -ne "$num4" ] && [ "$num1" -ne "$num5" ] && [ "$num2" -ne "$num3" ] && [ "$num2" -ne "$num4" ] && [ "$num2" -ne "$num5" ] && [ "$num3" -ne "$num4" ] && [ "$num3" -ne "$num5" ] && [ "$num4" -ne "$num5" ] && [ "$num6" -le "48" ] && [ "$num6" -gt "0" ] && [ "$num6" -ne "$num1" ] && [ "$num6" -ne "$num2" ] && [ "$num6" -ne "$num3" ] && [ "$num6" -ne "$num4" ] && [ "$num6" -ne "$num5" ] && [ "$num7" -le "48" ] && [ "$num7" -gt "0" ] && [ "$num7" -ne "$num1" ] && [ "$num7" -ne "$num2" ] && [ "$num7" -ne "$num3" ] && [ "$num7" -ne "$num4" ] && [ "$num7" -ne "$num5" ] && [ "$num7" -ne "$num6" ] 2> /dev/null
         then
                 clear
-                tput cup 1 1
-                echo $usuario
-                tput cup 1 15
+                sh cabecera.sh
                 echo "Apuesta Múltiple"
-                tput cup 1 40
-                echo "Saldo: $saldo"
-                tput cup 3 1
-                echo "Numeros elegidos: $num1:$num2:$num3:$num4:$num5:$num6:$num7"
-                tput cup 3 40
-                echo "21 combinaciones de 5 números"
-                tput cup 4 1
-                echo "Valor: $ $monto"
                 tput cup 6 1
+                echo "Numeros elegidos: $num1:$num2:$num3:$num4:$num5:$num6:$num7"
+                tput cup 7 40
+                echo "21 combinaciones de 5 números"
+                tput cup 8 40
+                echo "Valor: $ $monto"
+                tput cup 9 20
                 echo "Para confirmar la apuesta múltiple presione 5"
-                tput cup 7 1
+                tput cup 10 20
                 echo "Para volver al menú presione 0"
                 subopcion=4
                 while [ "$subopcion" -ne "5" ] && [ "$subopcion" -ne "0" ]
@@ -285,7 +281,7 @@ fi
 				apuesta[7]=$num7
                 if [ "$saldo" -gt "$monto" ] || [ "$saldo" -eq "$monto" ]
                 then
-                        echo "Combinaciones resultantes:"
+                        
                         for (( c=i; c<21; c++ ))
                         do
                                 var1=$((1+RANDOM%7))
@@ -313,8 +309,7 @@ fi
                                 while [ "$var5" -eq "$var1" ] || [ "$var5" -eq "$var2" ] || [ "$var5" -eq "$var3" ] || [ "$var5" -eq "$var4" ]
                                 do
                                         var5=$((1+RANDOM%7))
-                                done
-                                echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]} 
+                                done 
                                 echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple7 >> jugadas
                                 if [ "$revancha" -eq "1" ]
                                 then
@@ -323,6 +318,9 @@ fi
 
                                 fi
                         done
+	tput cup 13 20
+	echo "Apuestas realizadas con éxito"
+	tput cup 14 50
 	echo "Presione 0 para volver atras."
 	salir=1
 	while [ "$salir" -ne "0" ]
@@ -333,7 +331,9 @@ fi
 	esac
 	done
                 else
+		tput cup 12 20
                 echo "Saldo insuficiente."
+		tput cup 13 50
                 echo "Presione 0 para volver atras"
                 volver=1
                 while [ "$volver" -ne "0" ]
@@ -345,6 +345,19 @@ fi
                 esac
                 done
                 fi
+			oro=`grep oro pozos | cut -d":" -f1`
+                        revancha=`grep revancha pozos | cut -d":" -f1`
+                        plata=`grep plata pozos | cut -d":" -f1`
+
+                        porcentaje=$((monto / 3))
+
+                        nuevooro=$((oro + porcentaje))
+                        nuevoplata=$((plata + porcentaje))
+                        nuevorevancha=$((revancha + porcentaje))
+                        rm pozos
+                        echo $nuevooro":"oro > pozos
+                        echo $nuevoplata":"plata >> pozos
+                        echo $nuevorevancha":"revancha >> pozos
 
                         nuevosaldo=$((saldo - monto))
                         lineaactual=`grep $usuario usuarios | cut -d ":" -f1,2,3,4,5,6`
@@ -400,7 +413,7 @@ fi
 	tput cup 10 1
 	echo "Numero 8:"
         tput cup 11 1
-        echo "Jugar con revancha:   (S/N) ( $ 630 )" 
+        echo "Jugar con revancha:   (S/N)" 
         tput cup 3 10
         read num1
         tput cup 4 10
@@ -493,7 +506,7 @@ fi
                                 do
                                         var5=$((1+RANDOM%8))
                                 done
-                                echo ${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]} 
+                        
                                 echo ":"${apuesta[$var1]}":"${apuesta[$var2]}":"${apuesta[$var3]}":"${apuesta[$var4]}":"${apuesta[$var5]}":"$usuario":"multiple8 >> jugadas
                                 if [ "$revancha" -eq "1" ]
                                 then
@@ -502,6 +515,7 @@ fi
 
                                 fi
                         done
+	echo "Apuestas realizadas con éxito"
         echo "Presione 0 para volver atras."
         salir=1
         while [ "$salir" -ne "0" ]
@@ -524,6 +538,19 @@ fi
                 esac
                 done
                 fi
+			oro=`grep oro pozos | cut -d":" -f1`
+                        revancha=`grep revancha pozos | cut -d":" -f1`
+                        plata=`grep plata pozos | cut -d":" -f1`
+
+                        porcentaje=$((monto / 3))
+
+                        nuevooro=$((oro + porcentaje))
+                        nuevoplata=$((plata + porcentaje))
+                        nuevorevancha=$((revancha + porcentaje))
+                        rm pozos
+                        echo $nuevooro":"oro > pozos
+                        echo $nuevoplata":"plata >> pozos
+                        echo $nuevorevancha":"revancha >> pozos
 
                         nuevosaldo=$((saldo - monto))
                         lineaactual=`grep $usuario usuarios | cut -d ":" -f1,2,3,4,5,6`
@@ -572,7 +599,7 @@ fi
         tput cup 6 1
         echo "Numero 4:"
         tput cup 7 1
-        echo "Jugar con revancha:   (S/N) ( $ 1320 )" 
+        echo "Jugar con revancha:   (S/N)" 
         tput cup 3 10
         read num1
         tput cup 4 10
@@ -702,9 +729,10 @@ fi
                                 then
 
                                 echo ${multiple4[c]}":"$usuario":"multiple4 >> jugadasrevancha
-
+			
                                 fi
                         done
+	echo "Apuestas realizadas con éxito"
         echo "Presione 0 para volver atras."
         salir=1
         while [ "$salir" -ne "0" ]
@@ -727,6 +755,19 @@ fi
                 esac
                 done
                 fi
+			oro=`grep oro pozos | cut -d":" -f1`
+                        revancha=`grep revancha pozos | cut -d":" -f1`
+                        plata=`grep plata pozos | cut -d":" -f1`
+
+                        porcentaje=$((monto / 3))
+
+                        nuevooro=$((oro + porcentaje))
+                        nuevoplata=$((plata + porcentaje))
+                        nuevorevancha=$((revancha + porcentaje))
+                        rm pozos
+                        echo $nuevooro":"oro > pozos
+                        echo $nuevoplata":"plata >> pozos
+                        echo $nuevorevancha":"revancha >> pozos
 
                         nuevosaldo=$((saldo - monto))
                         lineaactual=`grep $usuario usuarios | cut -d ":" -f1,2,3,4,5,6`
